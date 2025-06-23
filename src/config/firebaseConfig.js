@@ -3,13 +3,12 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, connectAuthEmulator } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDpjMz_gzDUtdLtBryB1hDBccT7vgqRYaE",
-  authDomain: "sadhana-cart.firebaseapp.com",
-  projectId: "sadhana-cart",
-  storageBucket: "sadhana-cart.firebasestorage.app",
-  messagingSenderId: "126398142924",
-  appId: "1:126398142924:web:86f6c4c5cbe9a91685a569",
-  measurementId: "G-YB7BJQF2YD"
+  apiKey: "AIzaSyADym09lylkyz_KoCBxzfTo7X-uHSveUOU",
+  authDomain: "react-firebase-1d802.firebaseapp.com",
+  projectId: "react-firebase-1d802",
+  storageBucket: "react-firebase-1d802.firebasestorage.app",
+  messagingSenderId: "639628319251",
+  appId: "1:639628319251:web:2f15dd962b1e378994fde6"
 };
 
 let app;
