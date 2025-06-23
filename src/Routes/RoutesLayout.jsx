@@ -11,10 +11,12 @@ import ToastAlert from "../Components/Shared/PopUps/ToastAlert/ToastAlert";
 import ToastConfirm from "../Components/Shared/PopUps/ToastConfirm/ToastConfirm";
 import useCurrentSkipLinkId from "../Hooks/App/useCurrentSkipLinkId";
 import useOnlineStatus from "../Hooks/Helper/useOnlineStatus";
+import useRouteChange from "../Hooks/Helper/useRouteChange";
 
 const RoutesLayout = () => {
   const skipLinkSectionId = useCurrentSkipLinkId();
   const isWebsiteOnline = useOnlineStatus();
+  useRouteChange();
 
   return (
     <div className="App" tabIndex="-1">
