@@ -3,7 +3,6 @@
 .header {
   padding: 4px 14px 18px 14px;
   margin-top: 30px;
-  margin-left: -30px;
   border-bottom: 1px var(--medium-light-gray) solid;
 }
 
@@ -88,6 +87,7 @@
 .headerContent {
   display: flex;
   align-items: center;
+  margin-left: -60px;
   justify-content: space-between;
 }
 
