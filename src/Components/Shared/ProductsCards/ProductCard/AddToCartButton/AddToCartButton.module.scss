@@ -1,5 +1,3 @@
-@use "src/Styles/mixins" as m;
-
 .addToCartBtn {
   -webkit-tap-highlight-color: transparent;
   border: none;
@@ -30,26 +28,9 @@
     outline-offset: -2px;
     color: var(--yellow);
   }
-
-  &.inCart {
-    background-color: var(--dark-tomato);
-    transform: translateY(0);
-
-    &:hover {
-      background-color: var(--tomato);
-    }
-
-    svg {
-      fill: var(--white);
-    }
-
-    span {
-      color: var(--white);
-    }
-  }
 }
 
-.addToCartBtn svg {
+.addToCartBtn>svg {
   fill: var(--white);
   margin-inline-end: 6px;
   width: 19px;
@@ -57,17 +38,17 @@
   transition: fill .2s .05s;
 }
 
-.addToCartBtn:hover svg,
-.addToCartBtn:focus-visible svg {
+.addToCartBtn:hover>svg,
+.addToCartBtn:focus-visible>svg {
   fill: var(--yellow);
 }
 
-.addToCartBtn span {
+.addToCartBtn>span {
   color: var(--white);
   transition: color .2s .05s;
 }
 
-.addToCartBtn:hover span,
-.addToCartBtn:focus-visible span {
+.addToCartBtn:hover>span,
+.addToCartBtn:focus-visible>span {
   color: var(--yellow);
 }

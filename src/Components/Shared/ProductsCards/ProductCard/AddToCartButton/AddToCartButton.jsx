@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "src/Features/alertsSlice";
@@ -9,25 +9,25 @@ import s from "./AddToCartButton.module.scss";
 
 const AddToCartButton = ({ product }) => {
   const { t } = useTranslation();
-  const { cartProducts, orderProducts } = useSelector((state) => state.products);
-  const { loginInfo } = useSelector((state) => state.user);
-  const isSignIn = loginInfo?.isSignIn ?? false;
-  
-  const [isInCart, setIsInCart] = useState(false);
+  const { cartProducts, orderProducts } = useSelector(
+    (state) => state.products
+  );
+  const {
+    loginInfo: { isSignIn },
+  } = useSelector((state) => state.user);
+  const isProductAlreadyExist = isItemFound(cartProducts, product, "shortName");
+  const iconName = isProductAlreadyExist ? "trashCan" : "cart3";
+  const [iconNameState, setIconName] = useState(iconName);
   const dispatch = useDispatch();
+  const buttonText = t(
+    `productCard.buttonText.${
+      isProductAlreadyExist ? "removeFromCart" : "addToCart"
+    }`
+  );
 
-  useEffect(() => {
-    const productInCart = cartProducts?.find(item => item.shortName === product.shortName);
-    setIsInCart(!!productInCart);
-  }, [cartProducts, product.shortName]);
-
-  const handleCartButton = () => {
+  function handleCartButton() {
     if (!isSignIn) {
-      dispatch(showAlert({
-        alertText: t("toastAlert.addToCart"),
-        alertState: "warning",
-        alertType: "alert"
-      }));
+      showWarning("addToCart");
       return;
     }
 
@@ -38,56 +38,51 @@ const AddToCartButton = ({ product }) => {
     );
 
     if (isAlreadyAddedToOrder) {
-      dispatch(showAlert({
-        alertText: t("toastAlert.productAlreadyInOrder"),
-        alertState: "warning",
-        alertType: "alert"
-      }));
+      showWarning("productAlreadyInOrder");
       return;
     }
 
-    if (isInCart) {
-      dispatch(removeByKeyName({
-        dataKey: "cartProducts",
-        itemKey: "shortName",
-        keyValue: product.shortName
-      }));
-      setIsInCart(false);
-    } else {
-      const productToAdd = {
-        ...product,
-        quantity: 1
-      };
-      dispatch(addToArray({
-        key: "cartProducts",
-        value: productToAdd
-      }));
-      setIsInCart(true);
-      
-      dispatch(showAlert({
-        alertText: t("toastAlert.addedToCart"),
-        alertState: "success",
-        alertType: "alert"
-      }));
-    }
-  };
+    isProductAlreadyExist ? removeFromCart() : addToCart();
+  }
 
-  const buttonText = t(
-    `productCard.buttonText.${isInCart ? "removeFromCart" : "addToCart"}`
-  );
+  function showWarning(translateKey) {
+    dispatch(
+      showAlert({
+        alertText: t(`toastAlert.${translateKey}`),
+        alertState: "warning",
+        alertType: "alert",
+      })
+    );
+  }
+
+  function addToCart() {
+    const addAction = addToArray({ key: "cartProducts", value: product });
+    dispatch(addAction);
+    setIconName("trashCan");
+  }
+
+  function removeFromCart() {
+    const removeAction = removeByKeyName({
+      dataKey: "cartProducts",
+      itemKey: "shortName",
+      keyValue: product.shortName,
+    });
+
+    dispatch(removeAction);
+    setIconName("cart3");
+  }
 
   return (
     <button
       type="button"
-      className={`${s.addToCartBtn} ${isInCart ? s.inCart : ''}`}
+      className={`${s.addToCartBtn} ${s.addToCartButton}`}
       onClick={handleCartButton}
       aria-label={buttonText}
       data-add-to-cart-button
     >
-      <SvgIcon name={isInCart ? "trashCan" : "cart3"} />
+      <SvgIcon name={iconNameState} />
       <span>{buttonText}</span>
     </button>
   );
 };
-
 export default AddToCartButton;

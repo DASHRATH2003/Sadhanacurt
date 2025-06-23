@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../config/firebaseConfig";
 import "./SellerProductsSection.scss";
-import MarketplaceProductCard from "./MarketplaceProductCard";
 
 const CustomerProducts = () => {
   const [products, setProducts] = useState([]);
@@ -128,10 +127,38 @@ const CustomerProducts = () => {
       ) : (
         <div className="products-grid">
           {products.map(product => (
-            <MarketplaceProductCard 
-              key={`${product.sellerId}-${product.id}`}
-              product={product}
-            />
+            <div key={`${product.sellerId}-${product.id}`} className="product-card">
+              <div className="product-image-wrapper">
+                <img
+                  src={product.images && product.images.length > 0 ? product.images[0] : '/images/default-product.png'}
+                  alt={product.name}
+                  onError={(e) => {
+                    e.target.src = '/images/default-product.png';
+                  }}
+                />
+                {/* {product.discount && (
+                  <span className="discount-badge">-{product.discount}%</span>
+                )} */}
+              </div>
+              <div className="product-details">
+                <h3>{product.name}</h3>
+                <p className="seller">By {product.category || "Local Seller"}</p>
+
+                <div className="price-section">
+                  {/* {product.productDetails.Price && (
+                    <span className="original-price">
+                      ₹{product.productDetails.Price}
+                    </span>
+                  )} */}
+                  <span className="current-price">₹{product.productDetails.Price}</span>
+                </div>
+
+                <div className="product-actions">
+                  <button className="add-to-cart">Add to Cart</button>
+                  <button className="wishlist-btn">♡</button>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       )}
