@@ -46,16 +46,16 @@ const Footer = () => {
 
             <ul>
               <li>
-                <Link className="text" to="/privacy">{t("Privacy")}</Link>
+                <Link className="text" to="/privacy">{t("Privacy Policy")}</Link>
+              </li>
+              <li>
+                <Link className="text" to="/cancelationPolicy">{t("Cancellation Policy")}</Link>
               </li>
               <li>
                 <Link className="text" to="/termsOfUse">{t("Terms of Use")}</Link>
               </li>
               <li>
                 <Link className="text" to="/faqs">{t("FAQs")}</Link>
-              </li>
-              <li>
-               
               </li>
             </ul>
           </section>
