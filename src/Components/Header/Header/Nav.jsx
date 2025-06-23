@@ -18,8 +18,14 @@ const Nav = () => {
           <NavLink to="/">{t("nav.home")}</NavLink>
         </li>
 
+       
+
         <li>
           <NavLink to="/about">{t("nav.about")}</NavLink>
+        </li>
+        
+        <li>
+          <NavLink to="/products">{t("nav.products")}</NavLink>
         </li>
 
         <li>

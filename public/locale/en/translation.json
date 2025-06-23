@@ -16,6 +16,7 @@
     "home": "Home",
     "contact": "Contact",
     "about": "About",
+    "products": "Products",
     "Payments" : "Payments",
     "privacy policy": "Privacy Policy",
     "terms of use": "Terms of Use",
@@ -217,7 +218,7 @@
   "sectionsMenu": {
     "title": "Explore Our Collections",
     "womenFashion": {
-      "title": "Woman’s Fashion",
+      "title": "Woman's Fashion",
       "menuItems": {
         "elegantDress": "Elegant Dress",
         "chicBlouse": "Chic Blouse",
@@ -227,7 +228,7 @@
       }
     },
     "menFashion": {
-      "title": "Men’s Fashion",
+      "title": "Men's Fashion",
       "menuItems": {
         "tailoredSuit": "Tailored Suit",
         "casualShirts": "Casual Shirts",
@@ -375,7 +376,7 @@
       "description": "Black and White version of the PS5 coming out on sale."
     },
     "horizontalPoster": {
-      "title": "Women’s Collections",
+      "title": "Women's Collections",
       "description": "Featured woman collections that give you another vibe."
     },
     "smallPoster1": {

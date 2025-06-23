@@ -27,9 +27,11 @@ const CustomerProducts = () => {
       try {
         setLoading(true);
         setError(null);
+        console.log("Fetching products for category:", selectedCategory);
 
         const sellersSnapshot = await getDocs(collection(db, "seller"));
         const allSellers = sellersSnapshot.docs.map(doc => doc.id);
+        console.log("Found sellers:", allSellers);
         setSellers(allSellers);
 
         let allProducts = [];
@@ -39,6 +41,7 @@ const CustomerProducts = () => {
             for (const category of categories.slice(1)) {
               const productsRef = collection(db, "seller", sellerId, category);
               const snapshot = await getDocs(productsRef);
+              console.log(`Fetched ${snapshot.size} products for seller ${sellerId} in category ${category}`);
               snapshot.forEach(doc => {
                 allProducts.push({
                   id: doc.id,
@@ -53,6 +56,7 @@ const CustomerProducts = () => {
           for (const sellerId of allSellers) {
             const productsRef = collection(db, "seller", sellerId, selectedCategory);
             const snapshot = await getDocs(productsRef);
+            console.log(`Fetched ${snapshot.size} products for seller ${sellerId} in category ${selectedCategory}`);
             snapshot.forEach(doc => {
               allProducts.push({
                 id: doc.id,
@@ -64,6 +68,7 @@ const CustomerProducts = () => {
           }
         }
 
+        console.log("Total products fetched:", allProducts.length);
         setProducts(allProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -94,6 +99,8 @@ const CustomerProducts = () => {
       </div>
     );
   }
+
+  console.log("Rendering products:", products);
 
   return (
     <section className="thisMonthSection">
@@ -141,7 +148,7 @@ const CustomerProducts = () => {
                 )} */}
               </div>
               <div className="product-details">
-                <h3>{product.name}</h3>
+                <h3>{product.name || 'Unnamed Product'}</h3>
                 <p className="seller">By {product.category || "Local Seller"}</p>
 
                 <div className="price-section">
@@ -150,7 +157,7 @@ const CustomerProducts = () => {
                       ₹{product.productDetails.Price}
                     </span>
                   )} */}
-                  <span className="current-price">₹{product.productDetails.Price}</span>
+                  <span className="current-price">₹{product.productDetails?.Price || 'N/A'}</span>
                 </div>
 
                 <div className="product-actions">
