@@ -27,13 +27,13 @@ const CartProduct = ({ data }) => {
         <Link to={`/details?product=${name}`}>{translatedProductName}</Link>
       </td>
 
-      <td className={s.price}>${afterDiscount}</td>
+      <td className={s.price}>₹{afterDiscount}</td>
 
       <td>
         <CustomNumberInput product={data} quantity={quantity} />
       </td>
 
-      <td>${subTotal}</td>
+      <td>₹{subTotal}</td>
     </tr>
   );
 };

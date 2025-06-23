@@ -34,11 +34,11 @@ const OrderProduct = ({ data }) => {
         <Link to={`/details?product=${name}`}>{translatedProduct}</Link>
       </td>
 
-      <td className={s.price}>${afterDiscount}</td>
+      <td className={s.price}>₹{afterDiscount}</td>
 
       <td>{quantity}</td>
 
-      <td>${subTotal}</td>
+      <td>₹{subTotal}</td>
     </tr>
   );
 };

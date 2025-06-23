@@ -13,7 +13,7 @@ const PaymentCalculation = () => {
     <div className={s.calculationInfo}>
       <div className={s.item}>
         <span>{t(`${cartInfo}.subTotal`)}:</span>
-        <span>${subTotal}</span>
+        <span>₹{subTotal}</span>
       </div>
 
       <div className={s.item}>
@@ -23,7 +23,7 @@ const PaymentCalculation = () => {
 
       <div className={s.item}>
         <span>{t(`${cartInfo}.total`)}:</span>
-        <span>${subTotal}</span>
+        <span>₹{subTotal}</span>
       </div>
     </div>
   );
