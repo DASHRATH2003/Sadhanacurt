@@ -13,7 +13,9 @@ const Header = () => {
     <header className={s.header} dir="ltr">
       <div className={s.container}>
         <h1>
-          <Link to="/">{WEBSITE_NAME}</Link>
+          <Link to="/" className={s.logo}>
+            <img src="/sadhanacutlogo.jpeg" alt={WEBSITE_NAME} />
+          </Link>
         </h1>
 
         <div className={s.headerContent}>

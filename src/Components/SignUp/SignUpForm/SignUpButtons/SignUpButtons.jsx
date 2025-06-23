@@ -2,35 +2,43 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { googleIcon } from "src/Assets/Images/Images";
-import { DEFAULT_LOGIN_DATA } from "src/Data/globalVariables";
 import { setLoginData } from "src/Features/userSlice";
-import { openSignWithGooglePopUp } from "../../SignUpWithGoogle/SignUpWithGooglePopup";
-import { signInAlert } from "../SignUpForm";
+import { signInWithGoogle } from "src/services/authService";
+import { showAlert } from "src/Features/alertsSlice";
 import s from "./SignUpButtons.module.scss";
 
 const SignUpButtons = () => {
   const { t } = useTranslation();
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
-  let isSignUpWithGooglePressed = false;
-
-  function handleSignUpWithGoogle() {
-    if (isSignUpWithGooglePressed) return;
-    isSignUpWithGooglePressed = true;
-
-    openSignWithGooglePopUp();
-    setDefaultSignUpData();
-    signInAlert(t, dispatch);
-  }
-
-  function setDefaultSignUpData() {
-    setTimeout(() => {
-      navigateTo("/");
-      isSignUpWithGooglePressed = false;
-
-      setTimeout(() => dispatch(setLoginData(DEFAULT_LOGIN_DATA)), 500);
-    }, 2500);
-  }
+  
+  const handleSignUpWithGoogle = async () => {
+    try {
+      const result = await signInWithGoogle();
+      if (result.success) {
+        dispatch(setLoginData(result.user));
+        dispatch(showAlert({ 
+          alertText: t("toastAlert.signInSuccess"), 
+          alertState: "success",
+          alertType: "alert"
+        }));
+        navigateTo("/");
+      } else {
+        dispatch(showAlert({ 
+          alertText: t("toastAlert.loginFailed"), 
+          alertState: "error",
+          alertType: "alert"
+        }));
+      }
+    } catch (error) {
+      console.error("Google sign in error:", error);
+      dispatch(showAlert({ 
+        alertText: t("toastAlert.loginFailed"), 
+        alertState: "error",
+        alertType: "alert"
+      }));
+    }
+  };
 
   return (
     <div className={s.buttons}>
@@ -54,4 +62,5 @@ const SignUpButtons = () => {
     </div>
   );
 };
+
 export default SignUpButtons;

@@ -19,11 +19,11 @@ const Nav = () => {
         </li>
 
         <li>
-          <NavLink to="/contact">{t("nav.contact")}</NavLink>
+          <NavLink to="/about">{t("nav.about")}</NavLink>
         </li>
 
         <li>
-          <NavLink to="/about">{t("nav.about")}</NavLink>
+          <NavLink to="/contact">{t("nav.contact")}</NavLink>
         </li>
 
         <li>

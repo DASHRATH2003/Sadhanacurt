@@ -46,22 +46,22 @@
   font-size: 1.5rem;
 }
 
-.container h1>a {
+.logo {
+  display: block;
+  width: 50px;
+  height: auto;
   -webkit-tap-highlight-color: transparent;
   outline: none;
-  color: var(--black);
   position: relative;
 }
 
-.container>h1::first-letter {
-  transition: color .2s;
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.container>h1:has(:focus)::first-letter {
-  color: var(--orange-degree2);
-}
-
-.container h1>a::before {
+.logo::before {
   content: '';
   position: absolute;
   left: 0;
@@ -72,7 +72,7 @@
   transition: width .3s .1s;
 }
 
-.container h1:has(:focus)>a::before {
+.container h1:has(:focus) .logo::before {
   width: 100%;
 }
 
