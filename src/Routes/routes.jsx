@@ -37,7 +37,7 @@ export const ROUTES_CONFIG = [
   { path: "/login", element: <LogIn /> },
   { path: "/profile", element: <AccountPage /> },
   { path: "/search", element: <SearchPage /> },
-  {path:"/privacy",element:<PrivacyPage/>},
+  {path:"/privacy&policy",element:<PrivacyPage/>},
   {path: "/termsOfUse", element: <TermsOfUse/>},
   { path: "/payment", element: <PaymentsPage /> },
   { path: "/cancelationPolicy", element: <CancellationPolicyPage /> },
